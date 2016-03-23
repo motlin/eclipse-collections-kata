@@ -1,0 +1,217 @@
+
+Eclipse Collections Pet Kata
+============================
+
+Learning by exercises
+
+*go down for introduction*  
+*go right to skip introduction*
+
+
+What is Eclipse	Collections?
+----------------------------
+ https://www.eclipse.org/collections/
+ 
+ * The best Java collections framework ever that brings happiness to your Java development :)
+ * Rich, concise and readable APIs
+ * Many container types including immutable collections, primitive collections, bimaps, multimaps and bags
+ * Memory efficient containers
+
+
+What is a Code Kata?
+--------------------
+ * A programming exercise which helps hone your skills through practice.	
+ * This one is set up as a series of unit tests which fail.	
+ * Your task is to make them pass, using Eclipse Collections
+
+  > _I hear and I forget._  
+  > _I see and I remember._  
+  > _I do and I understand._  
+  > -- _Confucius_
+
+
+Eclipse Collections Code Kata
+-----------------------------
+ * New concepts are introduced in the slides
+ * Coding exercises are at the end of each section
+
+
+
+Set-up Eclipse Collections Kata
+-------------------------------
+ * Clone [Eclipse Collections repo](https://github.com/eclipse/eclipse-collections-kata) or simply download [master zip file](https://github.com/eclipse/eclipse-collections-kata/archive/master.zip) and extract
+ * Run gradle init script for your IDE
+ 
+ ```
+ gradlew eclipse
+ ```
+ 
+ ```
+ gradlew idea
+ ```
+
+ * Open your IDE and run tests under 
+
+ ```
+ pet-kata/src/tests
+ ```
+
+ * The tests are expected to fail. Your task is to make them pass, using Eclipse Collections
+
+
+Kata domain
+-----------
+ * Eclipse Collections Pet Kata uses `Person`, `Pet`, `PetType` 
+ * You can find domain objects are initialized in `PetDomainForKata` class
+ * Data is available to you through `this.people` which has some person and pet object set for you
+
+
+<img src="pet-domain.png" alt="Kata Domain" style="width: 55%;"/>
+
+
+
+Ex1
+===
+
+*go down to learn new concepts in Ex1*
+
+*go right to learn Ex1 solutions*
+
+
+Collect Pattern
+---------------
+ * _Collect_ Pattern (a.k.a. _map_ or _transform_).
+ * Return a new element where each element has been transformed.
+   * e.g. collect each pet's name.
+ * __Function__ is the type that takes an object and returns an object of a different type.
+   * a.k.a. _Transformer_.
+
+
+Collect Pattern (legacy for loop)
+---------------------------------
+
+```
+List<Pet> pets = someCodeToGetPets();
+List<String> petNames = new ArrayList<String>();	
+for (Pet pet : pets)	
+{
+petNames.add(pet.getName());	
+}
+```
+
+
+Collect Pattern (Eclipse Collections)
+-------------------------------------
+
+Using Java 8 lambda expression
+```
+MutableList<Pet> pets = someCodeToGetPets();
+MutableList<String> petNames = pets.collect(pet -> pet.getName());	
+```
+
+Or using method reference
+```
+MutableList<Pet> pets = someCodeToGetPets();
+MutableList<String> petNames = pets.collect(Pet::getName);	
+```
+
+
+Select Pattern
+--------------
+ * _Select_ Pattern (a.k.a. _filter_).
+ * Return the elements of collections that satisfy some condition
+   * e.g. select only those people who have a pet.
+ * __Predicate__ is the type that takes an object and returns a boolean
+
+
+Select Pattern (Eclipse Collections)
+------------------------------------
+
+```
+MutableList<Person> people = someCodeToGetPeople();
+MutableList<Person> petPeople 
+        = people.select(person -> person.isPetPerson());	
+```
+
+
+Exercise 1
+----------
+ * Fix `Exercise1Test`; they have failures.
+ * Figure out how to get the tests to pass using what you have seen so far.
+
+
+
+Ex1 solutions
+=============
+
+*go down to learn Ex1 solutions*
+
+*go right to learn Ex2*
+
+
+Get first names of people
+-------------------------
+```
+    @Test
+    public void getFirstNamesOfAllPeople()
+    {
+        MutableList<Person> people = this.people;
+        MutableList<String> firstNames = 
+            people.collect(Person::getFirstName);
+        MutableList<String> expectedFirstNames = 
+            Lists.mutable.with("Mary", "Bob", "Ted", "Jake", "Barry", "Terry", "Harry", "John");
+        Assert.assertEquals(expectedFirstNames, firstNames);
+    }
+```
+
+
+Get names of Mary Smith's Pets
+------------------------------
+```
+    @Test
+    public void getNamesOfMarySmithsPets()
+    {
+        Person person = this.getPersonNamed("Mary Smith");
+        MutableList<Pet> pets = person.getPets();
+        MutableList<String> names = 
+            pets.collect(eachPet -> eachPet.getName()); 
+        Assert.assertEquals("Tabby", names.makeString());
+    }
+```
+
+
+Get people with cats
+--------------------
+```
+    @Test
+    public void getPeopleWithCats()
+    {
+        MutableList<Person> people = this.people;
+        MutableList<Person> peopleWithCats = 
+            people.select(person -> person.hasPet(PetType.CAT));
+        Verify.assertSize(2, peopleWithCats);
+    }
+```
+
+
+Get people without cats
+-----------------------
+```
+    @Test
+    public void getPeopleWithoutCats()
+    {
+        MutableList<Person> people = this.people;
+        MutableList<Person> peopleWithoutCats = 
+            people.reject(person -> person.hasPet(PetType.CAT));
+        Verify.assertSize(6, peopleWithoutCats);
+    }
+```
+
+
+
+Ex2
+===
+
+*go down to learn new concepts in Ex2*
+
+*go right to learn Ex2 solutions*
