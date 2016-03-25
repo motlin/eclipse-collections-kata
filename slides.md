@@ -30,10 +30,10 @@ What is a Code Kata?
 * This one is set up as a series of unit tests which fail.
 * Your task is to make them pass, using Eclipse Collections.
 
-    I hear and I forget.
-    I see and I remember.
-    I do and I understand.
-    -- Confucius
+> _I hear and I forget._
+> _I see and I remember._
+> _I do and I understand._
+> \- Confucius
 
 
 Eclipse Collections Code Kata
@@ -78,8 +78,8 @@ people.add(z);
 
 
 
-Sort
-----
+Sort method signature
+---------------------
 
 ```
 public static void java.util.Collections.sort(
@@ -90,14 +90,16 @@ public static void java.util.Collections.sort(
 Javadoc
 -------
 
-> Sorts the specified list according to the order induced by the specified comparator.
-  All elements in the list must be mutually comparable.
+```
+Sorts the specified list according to the order induced by the specified comparator.
+All elements in the list must be mutually comparable.
+```
 
 
 Sort: Anonymous inner class
 ---------------------------
 
-```
+```java
 Collections.sort(people, new Comparator<Person>()
 {
   public int compare(Person o1, Person o2)
