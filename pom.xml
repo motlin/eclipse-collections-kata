@@ -92,6 +92,7 @@
         <maven.compiler.meminitial>2048m</maven.compiler.meminitial>
         <maven.compiler.maxmem>2048m</maven.compiler.maxmem>
 
+        <eclipse-collections.version>7.0.0</eclipse-collections.version>
     </properties>
 
     <dependencyManagement>
@@ -99,19 +100,19 @@
             <dependency>
                 <groupId>org.eclipse.collections</groupId>
                 <artifactId>eclipse-collections-api</artifactId>
-                <version>7.0.0</version>
+                <version>${eclipse-collections.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.eclipse.collections</groupId>
                 <artifactId>eclipse-collections</artifactId>
-                <version>7.0.0</version>
+                <version>${eclipse-collections.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.eclipse.collections</groupId>
                 <artifactId>eclipse-collections-testutils</artifactId>
-                <version>7.0.0</version>
+                <version>${eclipse-collections.version}</version>
                 <scope>test</scope>
             </dependency>
 
