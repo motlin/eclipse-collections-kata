@@ -92,7 +92,7 @@
         <maven.compiler.meminitial>2048m</maven.compiler.meminitial>
         <maven.compiler.maxmem>2048m</maven.compiler.maxmem>
 
-        <eclipse-collections.version>7.0.0</eclipse-collections.version>
+        <eclipse-collections.version>7.1.0</eclipse-collections.version>
     </properties>
 
     <dependencyManagement>
